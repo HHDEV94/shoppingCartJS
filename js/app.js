@@ -7,6 +7,12 @@ let courseShoppingCart = []
 
 loadEventListeners()
 function loadEventListeners() {
+  document.addEventListener('DOMContentLoaded', () => {
+    courseShoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) ?? []
+
+    htmlShoppingCart()
+  })
+
   courseList.addEventListener('click', addCourse)
   shoppingCart.addEventListener('click', deleteCourse)
   clearShoppingCartBtn.addEventListener('click', clearShoppingCart)
@@ -94,6 +100,12 @@ function htmlShoppingCart() {
 
     shoppingCartContainer.appendChild(row)
   })
+
+  syncShoppingCart()
+}
+
+function syncShoppingCart() {
+  localStorage.setItem('shoppingCart', JSON.stringify(courseShoppingCart))
 }
 
 function clearHtmlShoppingCart() {
